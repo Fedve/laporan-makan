@@ -20,12 +20,8 @@
                     <input type="text" id="imagetxt" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
                 <div class="mb-4">
-                    <label for="imagetxt" class="block text-gray-700 font-bold mb-2">Alert ( Jika Urgent! )</label>
-                    <input type="text" id="alertnow" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                </div>
-                <div class="mb-4">
                     <label for="imagetxt" class="block text-gray-700 font-bold mb-2">Date Upload</label>
-                    <input type="text" id="datenow" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <input placeholder="Day, date, Month, Year - Time WITA"  type="text" id="datenow" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
                 <div class="text-center">
                     <button id="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -58,15 +54,13 @@
                 var text = document.getElementById('text').value;
                 var imgtxt = document.getElementById('imagetxt').value;
                 var date = document.getElementById("datenow").value;
-                var alert = document.getElementById("alertnow").value;
-
+                
                 const userId = push(child(ref(database), 'users')).key;
 
                 set(ref(database, 'users/' + userId), {
                     text: text,
                     imgtxt: imgtxt,
-                    date: date,
-                    alert: alert
+                    date: date
                 });
                     alert("Saved");
             });
