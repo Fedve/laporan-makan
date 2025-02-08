@@ -1,0 +1,19 @@
+*{
+    margin: 0;
+}
+
+.isi{
+    margin: 5px;
+}
+.box{
+    width: auto;
+    height: auto;
+    border: 2px solid;
+    margin: 2px;
+}
+.box-kirim{
+    width: auto;
+    height: auto;
+    border: 2px solid;
+    margin: 2px;
+}
