@@ -1,69 +1,197 @@
 <html>
-    <head>
-        <title>Laporan Makan Kucing Periode 2025</title>
-        <script src="https://cdn.tailwindcss.com"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    </head>
-    <body class="bg-gray-100 font-roboto">
-        <div class="container mx-auto p-4">
-            <div class="text-center mb-8">
-                <h1 class="text-3xl font-bold">Form Submit Laporan</h1>
+<head>
+    <title>Laporan Makan Kucing Periode 2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-roboto">
+    <div class="container mx-auto p-4">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold">Form Submit Laporan</h1>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto">
+            <div class="mb-4">
+                <label for="text" class="block text-gray-700 font-bold mb-2">Text</label>
+                <input type="text" id="text" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
-            <div class="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto">
-                <div class="mb-4">
-                    <label for="text" class="block text-gray-700 font-bold mb-2">Text</label>
-                    <input type="text" id="text" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                </div>
-                <div class="mb-4">
-                    <label for="imagetxt" class="block text-gray-700 font-bold mb-2">Image URL</label>
-                    <input type="text" id="imagetxt" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                </div>
-                <div class="mb-4">
-                    <label for="imagetxt" class="block text-gray-700 font-bold mb-2">Date Upload</label>
-                    <input placeholder="Day, date, Month, Year - Time WITA"  type="text" id="datenow" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                </div>
-                <div class="text-center">
-                    <button id="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        Kirim
-                    </button>
-                </div>
+            <div class="mb-4">
+                <label for="imagetxt" class="block text-gray-700 font-bold mb-2">Image URL</label>
+                <input type="text" id="imagetxt" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div class="mb-4">
+                <label for="datenow" class="block text-gray-700 font-bold mb-2">Date Upload</label>
+                <input type="text" id="datenow" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div class="mb-4">
+                <label for="tarif" class="block text-gray-700 font-bold mb-2">Tarif</label>
+                <input type="number" id="tarif" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div class="text-center">
+                <button id="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    Kirim
+                </button>
             </div>
         </div>
-        <script type="module">
-            import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-app.js";
-            import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-analytics.js";
-            import { getDatabase, set, ref, push, child, onValue } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-database.js";
+        <div class="text-center mt-8">
+            <h1 class="text-3xl font-bold">Update Laporan</h1>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto mt-4">
+            <div class="mb-4">
+                <label for="update-id" class="block text-gray-700 font-bold mb-2">Report ID</label>
+                <input type="text" id="update-id" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div class="mb-4">
+                <label for="update-text" class="block text-gray-700 font-bold mb-2">Text</label>
+                <input type="text" id="update-text" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div class="mb-4">
+                <label for="update-imagetxt" class="block text-gray-700 font-bold mb-2">Image URL</label>
+                <input type="text" id="update-imagetxt" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div class="mb-4">
+                <label for="update-datenow" class="block text-gray-700 font-bold mb-2">Date Upload</label>
+                <input type="text" id="update-datenow" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div class="mb-4">
+                <label for="update-tarif" class="block text-gray-700 font-bold mb-2">Tarif</label>
+                <input type="number" id="update-tarif" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div class="text-center">
+                <button id="update" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
+                    Update
+                </button>
+            </div>
+        </div>
+        <div class="text-center mt-8">
+            <h1 class="text-3xl font-bold">Hapus Laporan</h1>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto mt-4">
+            <div class="mb-4">
+                <label for="delete-id" class="block text-gray-700 font-bold mb-2">Report ID</label>
+                <input type="text" id="delete-id" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
+            </div>
+            <div class="text-center">
+                <button id="delete" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">
+                    Hapus
+                </button>
+            </div>
+        </div>
+        <div class="text-center mt-8">
+            <h1 class="text-3xl font-bold">Laporan Terkini</h1>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md max-w-4xl mx-auto mt-4">
+            <div id="reports" class="space-y-4">
+                <!-- Reports will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-analytics.js";
+        import { getDatabase, set, ref, push, update, onValue, remove } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-database.js";
 
-            const firebaseConfig = {
-                apiKey: "AIzaSyCN8RWH8Qu8kV9YphKyn5Ul9jBRiFq1iz8",
-                authDomain: "storytale-9445a.firebaseapp.com",
-                databaseURL: "https://storytale-9445a-default-rtdb.firebaseio.com",
-                projectId: "storytale-9445a",
-                storageBucket: "storytale-9445a.firebasestorage.app",
-                messagingSenderId: "810989522601",
-                appId: "1:810989522601:web:619a11b5d381980a7b23b8",
-                measurementId: "G-XZKG6B4DZL"
-            };
+        const firebaseConfig = {
+            apiKey: "AIzaSyCN8RWH8Qu8kV9YphKyn5Ul9jBRiFq1iz8",
+            authDomain: "storytale-9445a.firebaseapp.com",
+            databaseURL: "https://storytale-9445a-default-rtdb.firebaseio.com",
+            projectId: "storytale-9445a",
+            storageBucket: "storytale-9445a.firebasestorage.app",
+            messagingSenderId: "810989522601",
+            appId: "1:810989522601:web:619a11b5d381980a7b23b8",
+            measurementId: "G-XZKG6B4DZL"
+        };
 
-            const app = initializeApp(firebaseConfig);
-            const analytics = getAnalytics(app);
-            const database = getDatabase(app);
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const database = getDatabase(app);
 
-            document.getElementById('submit').addEventListener('click', (e) => {
-                var text = document.getElementById('text').value;
-                var imgtxt = document.getElementById('imagetxt').value;
-                var date = document.getElementById("datenow").value;
-                
-                const userId = push(child(ref(database), 'users')).key;
+        document.getElementById('submit').addEventListener('click', () => {
+            const text = document.getElementById('text').value;
+            const imgtxt = document.getElementById('imagetxt').value;
+            const date = document.getElementById("datenow").value;
+            const tarif = document.getElementById("tarif").value;
 
-                set(ref(database, 'users/' + userId), {
-                    text: text,
-                    imgtxt: imgtxt,
-                    date: date
-                });
-                    alert("Saved");
+            const userId = push(child(ref(database), 'users')).key;
+
+            set(ref(database, 'users/' + userId), {
+                text: text,
+                imgtxt: imgtxt,
+                date: date,
+                tarif: tarif
+            }).then(() => {
+                alert("Saved");
+                loadReports();
+            }).catch((error) => {
+                alert("Error: " + error.message);
             });
-        </script>
-    </body>
+        });
+
+        document.getElementById('update').addEventListener('click', () => {
+            const reportId = document.getElementById('update-id').value;
+            const text = document.getElementById('update-text').value;
+            const imgtxt = document.getElementById('update-imagetxt').value;
+            const date = document.getElementById("update-datenow").value;
+            const tarif = document.getElementById("update-tarif").value;
+
+            update(ref(database, 'users/' + reportId), {
+                text: text,
+                imgtxt: imgtxt,
+                date: date,
+                tarif: tarif
+            }).then(() => {
+                alert("Updated");
+                loadReports();
+            }).catch((error) => {
+                alert("Error: " + error.message);
+            });
+        });
+
+        document.getElementById('delete').addEventListener('click', () => {
+            const reportId = document.getElementById('delete-id').value;
+
+            remove(ref(database, 'users/' + reportId)).then(() => {
+                alert("Deleted");
+                loadReports();
+            }).catch((error) => {
+                alert("Error: " + error.message);
+            });
+        });
+
+        function loadReports() {
+            const reportsRef = ref(database, 'users');
+            onValue(reportsRef, (snapshot) => {
+                const reportsContainer = document.getElementById('reports');
+                reportsContainer.innerHTML = ''; // Clear previous reports
+                let totalTarif = 0;
+                snapshot.forEach((childSnapshot) => {
+                    const report = childSnapshot.val();
+                    const reportElement = document.createElement('div');
+                    reportElement.className = 'bg-gray-50 p-4 rounded-lg shadow-md';
+                    reportElement.innerHTML = `
+                        <h3 class="text-lg font-bold">${report.text}</h3>
+                        <a href="${report.imgtxt}" class="text-blue-500 hover:underline">Lihat Gambar</a>
+                        <p class="text-gray-500">${report.date}</p>
+                        <p class="text-gray-700 font-semibold">Tarif: Rp. ${report.tarif}</p>
+                        <p class="text-gray-700 font-semibold">ID: ${childSnapshot.key}</p>
+                    `;
+                    reportsContainer.appendChild(reportElement);
+                    totalTarif += parseInt(report.tarif);
+                });
+                const totalTarifElement = document.createElement('div');
+                totalTarifElement.className = 'text-right mt-4';
+                totalTarifElement.innerHTML = `<h3 class="text-xl font-bold">Total Tarif: Rp. ${totalTarif}</h3>`;
+                reportsContainer.appendChild(totalTarifElement);
+            });
+        }
+
+        // Load reports on page load
+        loadReports();
+    </script>
+</body>
 </html>
