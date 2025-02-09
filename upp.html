@@ -124,13 +124,9 @@
                 imgtxt: imgtxt,
                 date: date,
                 tarif: tarif
-            }).then(() => {
-                alert("Saved");
-                loadReports();
-            }).catch((error) => {
-                alert("Error: " + error.message);
             });
-        });
+                alert("Saved");
+            });
 
         document.getElementById('update').addEventListener('click', () => {
             const reportId = document.getElementById('update-id').value;
