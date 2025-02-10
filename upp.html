@@ -101,7 +101,7 @@
             authDomain: "storytale-9445a.firebaseapp.com",
             databaseURL: "https://storytale-9445a-default-rtdb.firebaseio.com",
             projectId: "storytale-9445a",
-            storageBucket: "storytale-9445a.firebasestorage.app",
+            storageBucket: "storytale-9445a.appspot.com",
             messagingSenderId: "810989522601",
             appId: "1:810989522601:web:619a11b5d381980a7b23b8",
             measurementId: "G-XZKG6B4DZL"
@@ -117,16 +117,20 @@
             const date = document.getElementById("datenow").value;
             const tarif = document.getElementById("tarif").value;
 
-            const userId = push(child(ref(database), 'users')).key;
+            const userId = push(ref(database, 'users')).key;
 
             set(ref(database, 'users/' + userId), {
                 text: text,
                 imgtxt: imgtxt,
                 date: date,
                 tarif: tarif
-            });
+            }).then(() => {
                 alert("Saved");
+                loadReports();
+            }).catch((error) => {
+                alert("Error: " + error.message);
             });
+        });
 
         document.getElementById('update').addEventListener('click', () => {
             const reportId = document.getElementById('update-id').value;
