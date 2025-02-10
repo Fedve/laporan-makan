@@ -26,7 +26,7 @@
             </div>
             <div class="mb-4">
                 <label for="datenow" class="block text-gray-700 font-bold mb-2">Date Upload</label>
-                <input type="text" id="datenow" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <input type="text" id="datenow" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" readonly>
             </div>
             <div class="mb-4">
                 <label for="tarif" class="block text-gray-700 font-bold mb-2">Tarif</label>
@@ -56,7 +56,7 @@
             </div>
             <div class="mb-4">
                 <label for="update-datenow" class="block text-gray-700 font-bold mb-2">Date Upload</label>
-                <input type="text" id="update-datenow" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <input type="text" id="update-datenow" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" readonly>
             </div>
             <div class="mb-4">
                 <label for="update-tarif" class="block text-gray-700 font-bold mb-2">Tarif</label>
@@ -111,10 +111,15 @@
         const analytics = getAnalytics(app);
         const database = getDatabase(app);
 
+        function getCurrentDate() {
+            const date = new Date();
+            return date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+        }
+
         document.getElementById('submit').addEventListener('click', () => {
             const text = document.getElementById('text').value;
             const imgtxt = document.getElementById('imagetxt').value;
-            const date = document.getElementById("datenow").value;
+            const date = getCurrentDate();
             const tarif = document.getElementById("tarif").value;
 
             const userId = push(ref(database, 'users')).key;
@@ -136,7 +141,7 @@
             const reportId = document.getElementById('update-id').value;
             const text = document.getElementById('update-text').value;
             const imgtxt = document.getElementById('update-imagetxt').value;
-            const date = document.getElementById("update-datenow").value;
+            const date = getCurrentDate();
             const tarif = document.getElementById("update-tarif").value;
 
             update(ref(database, 'users/' + reportId), {
@@ -192,6 +197,22 @@
 
         // Load reports on page load
         loadReports();
+
+        // Authentication
+        function authenticate() {
+            const username = prompt("Enter username:");
+            const password = prompt("Enter password:");
+
+            if (username === "samueldimas1708" && password === "170899") {
+                alert("Authentication successful!");
+            } else {
+                alert("Authentication failed! Reloading page...");
+                location.reload();
+            }
+        }
+
+        // Call authentication on page load
+        authenticate();
     </script>
 </body>
 </html>
